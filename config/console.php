@@ -14,7 +14,6 @@ $config = [
                 '@vendor/yii2mod/yii2-settings/migrations',
                 '@yii/rbac/migrations',
                 '@yii/i18n/migrations',
-                '@app/rbac/migrations',
                 '@app/migrations',
             ],
         ],
