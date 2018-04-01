@@ -17,6 +17,9 @@ $config = [
                 '@app/migrations',
             ],
         ],
+        'migration' => [
+            'class' => 'bizley\migration\controllers\MigrationController',
+        ],
         'fixture' => [
             'class' => 'yii\console\controllers\FixtureController',
             'namespace' => 'app\tests\fixtures',
