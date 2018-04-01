@@ -43,7 +43,13 @@
         "cyberz/yii2-multipath-migrations": "*",
         "yii2mod/yii2-comments": "*",
         "yii2mod/yii2-cart": "*",
-        "skeeks/yii2-assets-auto-compress": "*"
+        "skeeks/yii2-assets-auto-compress": "*",
+        "brussens/yii2-maintenance-mode": "*",
+        "mootensai/yii2-enhanced-gii": "dev-master",
+        "kartik-v/yii2-mpdf": "dev-master",
+        "kartik-v/yii2-tree-manager": "dev-master",
+        "yii2mod/yii2-gii-extended": "^1.0",
+        "yii2tech/ar-softdelete": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

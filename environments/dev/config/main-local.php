@@ -1,4 +1,5 @@
 <?php
+
 $config = [
     'components' => [
         'request' => [
@@ -22,10 +23,22 @@ if (!YII_ENV_TEST) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
+        // uncomment the following to add your IP if you are not connecting from localhost.
+        'allowedIPs' => [@$_SERVER['REMOTE_ADDR'], '127.0.0.1', '::1'],
     ];
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
+        // uncomment the following to add your IP if you are not connecting from localhost.
+        'allowedIPs' => [@$_SERVER['REMOTE_ADDR'], '127.0.0.1', '::1'],
+        'generators' => [
+            'enumerable' => [
+                'class' => 'yii2mod\gii\enum\Generator',
+            ],
+            'crud' => [
+                'class' => 'yii2mod\gii\crud\Generator',
+            ],
+        ],
     ];
 }
 

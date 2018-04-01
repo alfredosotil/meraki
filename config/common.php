@@ -3,16 +3,23 @@
 Yii::setAlias('@tests', dirname(__DIR__) . '/tests');
 
 $params = array_merge(
-    require(__DIR__ . '/params.php'),
-    require(__DIR__ . '/params-local.php')
+        require(__DIR__ . '/params.php'), require(__DIR__ . '/params-local.php')
 );
 
 $config = [
     'name' => 'Yii2 Basic Template',
     'language' => 'es',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log', 'assetsAutoCompress'],
-    'components' => [        
+    'bootstrap' => ['log', 'maintenanceMode', 'assetsAutoCompress'],
+    'components' => [
+        'maintenanceMode' => [
+            'class' => 'brussens\maintenance\MaintenanceMode',
+            'enabled' => false,
+            // Show title
+            'title' => 'this site is under maintenance',
+            // Show message
+            'message' => 'Sorry, perform technical works.',
+        ],
         'assetsAutoCompress' =>
         [
             'class' => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent',

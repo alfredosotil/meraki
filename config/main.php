@@ -1,8 +1,22 @@
 <?php
+
 $config = [
     'id' => 'main',
     'defaultRoute' => 'site/index',
     'modules' => [
+        'gridview' => [
+            'class' => '\kartik\grid\Module',
+        // see settings on http://demos.krajee.com/grid#module
+        ],
+        'datecontrol' => [
+            'class' => '\kartik\datecontrol\Module',
+        // see settings on http://demos.krajee.com/datecontrol#module
+        ],
+        // If you use tree table
+        'treemanager' => [
+            'class' => '\kartik\tree\Module',
+        // see settings on http://demos.krajee.com/tree-manager#module
+        ],
         'admin' => [
             'class' => 'app\modules\admin\Module',
             'controllerMap' => [
