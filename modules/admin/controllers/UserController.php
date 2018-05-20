@@ -2,41 +2,28 @@
 
 namespace app\modules\admin\controllers;
 
-use app\models\UserModel;
-use app\modules\admin\models\search\UserSearch;
-use app\traits\FindModelTrait;
 use Yii;
-use yii\filters\VerbFilter;
+use app\models\User;
+use app\models\UserSearch;
 use yii\web\Controller;
-use yii\web\ForbiddenHttpException;
-use yii2mod\editable\EditableAction;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 
 /**
- * Class UserController
- *
- * @package app\modules\admin\controllers
+ * UserController implements the CRUD actions for User model.
  */
 class UserController extends Controller
 {
-    use FindModelTrait;
-
-    /**
-     * Name of the session key in which the original user id is saved.
-     */
-    const ORIGINAL_USER_SESSION_KEY = 'original_user';
-
-    /**
-     * @inheritdoc
-     */
+   /**
+    * Behaviors
+    * @return array
+    */
     public function behaviors()
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::class,
+                'class' => VerbFilter::className(),
                 'actions' => [
-                    'index' => ['get'],
-                    'create' => ['get', 'post'],
-                    'update' => ['get', 'post'],
                     'delete' => ['post'],
                 ],
             ],
@@ -44,106 +31,87 @@ class UserController extends Controller
     }
 
     /**
-     * @inheritdoc
+     * Lists all User models.
+     * @return mixed
      */
-    public function actions()
+    public function actionIndex()
     {
-        return [
-            'edit-user' => [
-                'class' => EditableAction::class,
-                'modelClass' => UserModel::class,
-                'forceCreate' => false,
-            ],
-            'index' => [
-                'class' => 'yii2tech\admin\actions\Index',
-                'newSearchModel' => function () {
-                    return new UserSearch();
-                },
-            ],
-            'delete' => [
-                'class' => 'yii2tech\admin\actions\Delete',
-                'findModel' => function ($id) {
-                    return $this->findModel(UserModel::class, $id);
-                },
-                'flash' => Yii::t('app', 'User has been deleted.'),
-            ],
-        ];
+        $searchModel = new UserSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
-     * Creates a new user.
-     *
-     * If creation is successful, the browser will be redirected to the 'index' page.
-     *
+     * Creates a new User model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new UserModel(['scenario' => 'create']);
+        $model = new User();
 
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->create()) {
-                Yii::$app->session->setFlash('success', Yii::t('app', 'User has been created.'));
-
-                return $this->redirect(['index']);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'User has been created.');
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
             'model' => $model,
         ]);
+
     }
 
     /**
-     * Updates an existing user.
-     *
-     * If update is successful, the browser will be redirected to the 'index' page.
-     *
-     * @param int $id
-     *
+     * Updates an existing User model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
      * @return mixed
      */
     public function actionUpdate($id)
     {
-        /* @var $model UserModel */
-        $model = $this->findModel(UserModel::class, $id);
+        $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if (!empty($model->plainPassword)) {
-                $model->setPassword($model->plainPassword);
-            }
-            $model->save(false);
-            Yii::$app->session->setFlash('success', Yii::t('app', 'User has been saved.'));
-
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'User has been saved.');
             return $this->redirect(['index']);
         }
 
         return $this->render('update', [
             'model' => $model,
         ]);
+
     }
 
     /**
-     * Switches to the given user for the rest of the Session.
-     *
-     * @param int $id
-     *
-     * @throws ForbiddenHttpException
-     *
-     * @return string
+     * Deletes an existing User model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
      */
-    public function actionSwitch($id)
+    public function actionDelete($id)
     {
-        if (Yii::$app->session->has(self::ORIGINAL_USER_SESSION_KEY)) {
-            $user = $this->findModel(UserModel::class, Yii::$app->session->get(self::ORIGINAL_USER_SESSION_KEY));
-            Yii::$app->session->remove(self::ORIGINAL_USER_SESSION_KEY);
+        $this->findModel($id)->delete();
+        Yii::$app->session->setFlash('success', 'User has been deleted.');
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Finds the User model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return User the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = User::findOne($id)) !== null) {
+            return $model;
         } else {
-            $user = $this->findModel(UserModel::class, $id);
-            Yii::$app->session->set(self::ORIGINAL_USER_SESSION_KEY, Yii::$app->user->id);
+            throw new NotFoundHttpException('The requested page does not exist.');
         }
-
-        Yii::$app->user->switchIdentity($user, 3600);
-
-        return $this->goHome();
     }
 }

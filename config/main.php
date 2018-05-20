@@ -47,7 +47,7 @@ $config = [
             'cookieValidationKey' => 'fYPq2eLM',
         ],
         'user' => [
-            'identityClass' => 'app\models\UserModel',
+            'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
             'on afterLogin' => function ($event) {
                 $event->identity->updateLastLogin();
@@ -80,6 +80,13 @@ $config = [
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 '<module:\w+>/<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
                 ['class' => 'yii2mod\cms\components\PageUrlRule'],
+            ],
+        ],
+        'assetManager' => [
+            'bundles' => [
+                'dmstr\web\AdminLteAsset' => [
+                    'skin' => 'skin-black',
+                ],
             ],
         ],
     ],

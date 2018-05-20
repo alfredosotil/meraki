@@ -2,7 +2,7 @@
 
 namespace app\modules\admin\models\search;
 
-use app\models\UserModel;
+use app\models\User;
 use yii\data\ActiveDataProvider;
 
 /**
@@ -10,7 +10,7 @@ use yii\data\ActiveDataProvider;
  *
  * @package app\modules\admin\models\search
  */
-class UserSearch extends UserModel
+class UserSearch extends User
 {
     /**
      * {@inheritdoc}
@@ -33,7 +33,7 @@ class UserSearch extends UserModel
      */
     public function search($params, $pageSize = 10)
     {
-        $query = UserModel::find();
+        $query = User::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

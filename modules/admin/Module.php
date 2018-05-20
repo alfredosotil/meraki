@@ -19,7 +19,7 @@ class Module extends \yii\base\Module
     /**
      * @var string|bool the layout that should be applied for views within this module
      */
-    public $layout = 'column2';
+    public $layout = 'main';
 
     /**
      * @var string the namespace that controller classes are in

@@ -7,7 +7,7 @@ $params = array_merge(
 );
 
 $config = [
-    'name' => 'Yii2 Basic Template',
+    'name' => 'Meraki',
     'language' => 'es',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log', 'maintenanceMode', 'assetsAutoCompress'],
@@ -23,6 +23,7 @@ $config = [
         'assetsAutoCompress' =>
         [
             'class' => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent',
+            'enabled' => false,
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
@@ -30,6 +31,9 @@ $config = [
         ],
         'formatter' => [
             'class' => 'yii\i18n\Formatter',
+            'dateFormat' => 'php:d-M-Y',
+            'datetimeFormat' => 'php:d-M-Y H:i:s',
+            'timeFormat' => 'php:H:i:s',
         ],
         'cache' => [
             'class' => 'yii\caching\ArrayCache',

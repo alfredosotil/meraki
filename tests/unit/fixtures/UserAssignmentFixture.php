@@ -1,6 +1,6 @@
 <?php
 
-namespace app\tests\fixtures;
+namespace tests\unit\fixtures;
 
 use Yii;
 use yii\test\ActiveFixture;
@@ -15,7 +15,7 @@ class UserAssignmentFixture extends ActiveFixture
     /**
      * @var string
      */
-    public $depends = ['app\tests\fixtures\UserFixture'];
+    public $depends = ['tests\unit\fixtures\UserFixture'];
 
     /**
      * @inheritdoc

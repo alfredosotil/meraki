@@ -17,13 +17,14 @@ $config = [
                 '@app/migrations',
             ],
         ],
+        'fixture' => [
+            'class' => 'yii\faker\FixtureController',
+            'templatePath' => '@tests/templates/fixtures',
+            'fixtureDataPath' => '@tests/_data',
+        ],
         'migration' => [
             'class' => 'bizley\migration\controllers\MigrationController',
-        ],
-        'fixture' => [
-            'class' => 'yii\console\controllers\FixtureController',
-            'namespace' => 'app\tests\fixtures',
-        ],
+        ]
     ],
     'components' => [
         'urlManager' => [

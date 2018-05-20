@@ -2,28 +2,51 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii2mod\user\models\enums\UserStatus;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\UserModel */
+/* @var $model app\models\User */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="user-form">
 
-    <?php $form = ActiveForm::begin(['id' => 'create-user-form']); ?>
+    <?php $form = ActiveForm::begin(); ?>
 
-    <div class="row">
-        <div class="col-md-6">
-            <?php echo $form->field($model, 'username')->textInput(['maxlength' => 255]) ?>
+    <?php echo $form->field($model, 'name')->textInput(['maxlength' => 45]) ?>
 
-            <?php echo $form->field($model, 'email')->textInput(['maxlength' => 255]) ?>
+    <?php echo $form->field($model, 'last_name')->textInput(['maxlength' => 45]) ?>
 
-            <?php echo $form->field($model, 'status')->dropDownList(UserStatus::listData()); ?>
+    <?php echo $form->field($model, 'phone_number')->textInput(['maxlength' => 45]) ?>
 
-            <?php echo $form->field($model, 'plainPassword')->passwordInput(['autocomplete' => 'off']); ?>
-        </div>
-    </div>
+    <?php echo $form->field($model, 'username')->textInput(['maxlength' => 255]) ?>
+
+    <?php // echo $form->field($model, 'auth_key')->textInput(['maxlength' => 32]) ?>
+
+    <?php // echo $form->field($model, 'password_hash')->textInput(['maxlength' => 255]) ?>
+
+    <?php echo $form->field($model, 'email')->textInput(['maxlength' => 255]) ?>
+
+    <?php // echo $form->field($model, 'created_at')->textInput() ?>
+
+    <?php echo $form->field($model, 'birthday')->textInput(['maxlength' => 255]) ?>
+
+    <?php // echo $form->field($model, 'updated_at')->textInput() ?>
+
+    <?php echo $form->field($model, 'history_id')->textInput() ?>
+
+    <?php echo $form->field($model, 'status')->checkbox() ?>
+
+    <?php // echo $form->field($model, 'last_login')->textInput() ?>
+
+    <?php // echo $form->field($model, 'total_points')->textInput() ?>
+
+    <?php // echo $form->field($model, 'deleted_at')->textInput()   ?>
+
+    <?php // echo $form->field($model, 'deleted_by')->textInput() ?>
+
+    <?php // echo $form->field($model, 'password_reset_token')->textInput(['maxlength' => 255]) ?>
+
+    <?php // echo $form->field($model, 'uuid')->textInput(['maxlength' => 45]) ?>
 
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

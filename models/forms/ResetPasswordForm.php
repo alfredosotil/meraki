@@ -2,7 +2,7 @@
 
 namespace app\models\forms;
 
-use app\models\UserModel;
+use app\models\User;
 use Yii;
 use yii\base\Model;
 use yii\web\IdentityInterface;

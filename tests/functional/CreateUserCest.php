@@ -34,7 +34,7 @@ class CreateUserCest
         $I->see('Create User');
         $I->submitForm($this->createUserFormId, $this->createUserFormParams('created-user', 'created-user@example.com', '123123'));
         $I->see('Users', 'h1');
-        $I->seeRecord('app\models\UserModel', [
+        $I->seeRecord('app\models\User', [
             'username' => 'created-user',
             'email' => 'created-user@example.com',
         ]);
@@ -51,9 +51,9 @@ class CreateUserCest
     protected function createUserFormParams($username, $email, $password)
     {
         return [
-            'UserModel[username]' => $username,
-            'UserModel[email]' => $email,
-            'UserModel[plainPassword]' => $password,
+            'User[username]' => $username,
+            'User[email]' => $email,
+            'User[plainPassword]' => $password,
         ];
     }
 }

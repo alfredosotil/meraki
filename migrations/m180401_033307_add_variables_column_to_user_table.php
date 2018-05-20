@@ -18,7 +18,7 @@ class m180401_033307_add_variables_column_to_user_table extends Migration
         $this->addColumn('user', 'phone_number', $this->string(45)->null());
         $this->addColumn('user', 'birthday', $this->string(255)->null());
         $this->addColumn('user', 'total_points', $this->integer(11)->null());
-        $this->addColumn('user', 'history_id', $this->integer(11)->notNull());
+        $this->addColumn('user', 'history_id', $this->integer(11)->null());
         $this->addColumn('user', 'deleted_at', $this->timestamp()->null());
         $this->addColumn('user', 'deleted_by', $this->timestamp()->null());
     }

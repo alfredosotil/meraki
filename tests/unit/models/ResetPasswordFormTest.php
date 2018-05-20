@@ -3,7 +3,7 @@
 namespace app\tests\unit\models;
 
 use app\models\forms\ResetPasswordForm;
-use app\models\UserModel;
+use app\models\User;
 use app\tests\fixtures\UserAssignmentFixture;
 use Yii;
 
@@ -21,7 +21,7 @@ class ResetPasswordFormTest extends \Codeception\Test\Unit
 
     public function testCheckEmptyForm()
     {
-        $user = UserModel::findOne(['email' => 'test-user@example.com']);
+        $user = User::findOne(['email' => 'test-user@example.com']);
         $this->_model = new ResetPasswordForm($user);
 
         expect($this->_model->resetPassword())->false();
@@ -31,7 +31,7 @@ class ResetPasswordFormTest extends \Codeception\Test\Unit
 
     public function testCheckInvalidConfirmPassword()
     {
-        $user = UserModel::findOne(['email' => 'test-user@example.com']);
+        $user = User::findOne(['email' => 'test-user@example.com']);
         $this->_model = new ResetPasswordForm($user, [
             'password' => '123123',
             'confirmPassword' => '123456',
@@ -43,7 +43,7 @@ class ResetPasswordFormTest extends \Codeception\Test\Unit
 
     public function testCorrectResetPassword()
     {
-        $user = UserModel::findOne(['email' => 'test-user@example.com']);
+        $user = User::findOne(['email' => 'test-user@example.com']);
         $this->_model = new ResetPasswordForm($user, [
             'password' => '123456',
             'confirmPassword' => '123456',

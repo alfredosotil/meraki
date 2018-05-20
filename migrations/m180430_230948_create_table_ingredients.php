@@ -13,6 +13,7 @@ class m180430_230948_create_table_ingredients extends Migration
 
         $this->createTable('{{%ingredients}}', [
             'id' => $this->primaryKey(),
+            'uuid' => $this->string()->notNull(),
             'group_food_id' => $this->integer()->notNull(),
             'type_ingredient_id' => $this->integer()->notNull(),
             'name' => $this->string()->notNull(),
